@@ -1,0 +1,50 @@
+VITRINE — INSTALAÇÃO NO AEONFREE
+
+1. No painel do AeonFree, confirme os dados MySQL da conta/banco existente em config.php.
+   O config.php já é usado diretamente pelo backend api.php; mantenha-o privado.
+2. Abra o phpMyAdmin pelo painel do hosting, selecione o banco configurado e importe database.sql.
+3. Envie TODOS estes arquivos para a mesma pasta pública do site:
+   - index.html
+   - index.php
+   - app.html
+   - vitrine-app.js
+   - api.php
+   - config.php
+   - .htaccess
+   O index.html é apenas um redirecionamento para index.php. Substitua uma versão
+   antiga que já esteja no hosting; não mantenha a página demonstrativa antiga.
+4. Acesse o site pelo endereço HTTPS do hosting, e não abrindo o HTML por file://.
+   Crie uma conta na tela da Vitrine e depois entre nela. O MySQL armazena o perfil e
+   os contatos; cada consulta/alteração de contatos é limitada ao usuário conectado.
+5. Faça uma busca por cidade/bairro. Os resultados vêm do OpenStreetMap. "Sem site"
+   significa somente que o cadastro consultado não informa um site.
+6. Para apresentar seu trabalho, preencha e salve seu perfil. Quando o cadastro do
+   OpenStreetMap trouxer um e-mail ou telefone público, os botões do Gmail e do
+   WhatsApp preparam uma mensagem individual para você revisar e enviar manualmente.
+   A Vitrine não envia mensagens automaticamente. Use apenas canais apropriados,
+   respeite pedidos para não receber contato e não faça disparos em massa.
+
+DIAGNÓSTICO DO DOMÍNIO
+- O domínio https://vitrine.iceiy.com/ foi testado e o AeonFree respondeu 403 na
+  raiz e 404 ao abrir /app.html e /index.php. Portanto, neste momento o domínio não
+  está servindo estes arquivos da aplicação; editar o JavaScript/CSS não corrige
+  esse retorno da hospedagem.
+- No painel do AeonFree, confirme que o domínio/subdomínio está ativo e associado
+  à pasta raiz (document root) indicada pelo próprio painel. Envie os arquivos
+  acima para essa pasta exata. Se o domínio estiver suspenso, sem associação ou
+  apontando para outra pasta, corrija isso no painel ou contate o suporte.
+- Após o envio, https://vitrine.iceiy.com/app.html deve mostrar a tela de login
+  da Vitrine. https://vitrine.iceiy.com/api.php?action=session deve retornar JSON;
+  uma resposta 403/404 do AeonFree significa que a publicação/domínio ainda precisa
+  ser corrigida antes de testar o banco.
+
+SEGURANÇA
+- Não compartilhe nem publique o config.php com as credenciais do banco.
+- O .htaccess bloqueia acesso HTTP direto ao config.php e database.sql; mantenha-o
+  junto aos outros arquivos no hosting Apache.
+- Não invente lojas ou dados de contato; os resultados vêm somente do cadastro público.
+- A busca externa pode ficar temporariamente indisponível ou apresentar cadastros
+  incompletos; nesses casos o site mostra erro, sem criar resultados falsos.
+
+O navegador não consegue acessar PHP/MySQL ao abrir um arquivo local. O backend e o
+banco só funcionarão depois de enviar os arquivos para o hosting e importar database.sql.
